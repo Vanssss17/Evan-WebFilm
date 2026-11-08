@@ -12,17 +12,17 @@
     <div class="w3l_sign_in_register">
   <ul>
     @auth
-      <li>
-        @if (auth()->user()->isAdmin())
-          <a href="{{ route('admin.dashboard') }}" style="margin-right:8px;">Admin</a>
-        @endif
-        <a href="{{ route('profile.show') }}" style="color:#212121; font-weight:bold; margin-right:8px;">{{ auth()->user()->name }}</a>
-        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="post" style="display:none;">
-          @csrf
-        </form>
-      </li>
-    @else
+          <li>
+            @if (auth()->user()->isAdmin())
+              <a href="{{ route('admin.dashboard') }}">Panel Admin</a>
+            @endif
+            <a href="{{ route('profile.show') }}" title="Profil saya"><i class="fa fa-user" style="padding-right:6px;"></i>{{ auth()->user()->name }}</a>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="post" style="display:none;">
+              @csrf
+            </form>
+          </li>
+        @else
       <li><a href="{{ route('login') }}">Login</a></li>
     @endauth
   </ul>

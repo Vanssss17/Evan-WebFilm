@@ -4,6 +4,26 @@
     aspect-ratio: 2 / 3;
     object-fit: cover;
   }
+
+  .w3l_sign_in_register {
+  width: auto;
+  margin-top: 0.6em;
+  }
+  .w3l_sign_in_register ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .w3l_sign_in_register ul li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 !important;
+  }
+  .w3l_sign_in_register ul li a {
+    padding: 6px 16px;
+    white-space: nowrap;
+  }
 </style>
 
 <head>
