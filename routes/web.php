@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\FilmController as AdminFilmController;
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 use App\Http\Controllers\Admin\CastController as AdminCastController;
 use App\Http\Controllers\Admin\PeranController as AdminPeranController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -54,4 +55,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('perans/{peran}/edit', [AdminPeranController::class, 'edit'])->name('perans.edit');
     Route::put('perans/{peran}', [AdminPeranController::class, 'update'])->name('perans.update');
     Route::delete('perans/{peran}', [AdminPeranController::class, 'destroy'])->name('perans.destroy');
+    Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
 });

@@ -8,4 +8,7 @@
   <li class="{{ request()->routeIs('admin.casts.*') ? 'active' : '' }}">
     <a href="{{ route('admin.casts.index') }}">Cast</a>
   </li>
+  <li class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+    <a href="{{ route('admin.users.index') }}">User</a>
+  </li>
 </ul>
