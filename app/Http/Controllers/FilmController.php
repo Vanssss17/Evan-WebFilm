@@ -19,11 +19,10 @@ class FilmController extends Controller
      */
     public function movies()
     {
-        //
         $genreFilm = null;
         $films = Film::select('id','title', 'poster','year')
                 ->orderByDesc('year')
-                ->OrderBy('created_at', 'asc')
+                ->orderByDesc('id')
                 ->paginate(18);
         return view('components/movies', compact('films', 'genreFilm'));
     }
@@ -97,30 +96,29 @@ class FilmController extends Controller
     public function movieHome()
     {
         $films = Film::select('id','title', 'poster','year')
-                ->OrderBy('created_at', 'asc')
+                ->orderByDesc('id')
                 ->limit(9)->get();
         $filmFutured = Film::select('id','title', 'poster','year')
                         ->orderByDesc('year')
-                        ->OrderBy('created_at', 'asc')
+                        ->orderByDesc('id')
                         ->limit(6)->get();
         $filmRecentAdded = Film::select('id','title', 'poster','year')
-                            ->orderByDesc('created_at', 'asc')
+                            ->orderByDesc('id')
                             ->limit(6)->get();
         $filmSlidey = Film::select('title', 'poster','sinopsis')
                         ->orderByDesc('year')
-                        ->OrderBy('created_at', 'asc')
+                        ->orderByDesc('id')
                         ->limit(6)->get();
         return view('components/home', compact('filmSlidey','films','filmFutured','filmRecentAdded'));
     }
 
     public function moviesByGenre($genre)
     {
-        //
         $genreFilm = Genre::where('id', '=', $genre)->first();
         $films = Film::select('id','title', 'poster','year')
                 ->where('genre_id', '=', $genre)
                 ->orderByDesc('year')
-                ->OrderBy('created_at', 'asc')
+                ->orderByDesc('id')
                 ->paginate(18);
         return view('components/movies', compact('films','genreFilm'));
     }

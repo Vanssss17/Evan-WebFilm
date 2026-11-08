@@ -8,6 +8,8 @@ use App\Http\Controllers\{
     ProfileController,
 };
 
+use App\Http\Controllers\Admin\FilmController as AdminFilmController;
+
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.store');
@@ -37,4 +39,9 @@ Route::post('/movies/{film}/kritik', [KritikController::class, 'store'])
     Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', fn () => redirect()->route('admin.films.index'))->name('dashboard');
+    Route::resource('films', AdminFilmController::class)->except(['show']);
 });

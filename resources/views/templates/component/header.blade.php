@@ -13,7 +13,10 @@
   <ul>
     @auth
       <li>
-        <span style="color:#212121; font-weight:bold; margin-right:8px;">{{ auth()->user()->name }}</span>
+        @if (auth()->user()->isAdmin())
+          <a href="{{ route('admin.dashboard') }}" style="margin-right:8px;">Admin</a>
+        @endif
+        <a href="{{ route('profile.show') }}" style="color:#212121; font-weight:bold; margin-right:8px;">{{ auth()->user()->name }}</a>
         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
         <form id="logout-form" action="{{ route('logout') }}" method="post" style="display:none;">
           @csrf

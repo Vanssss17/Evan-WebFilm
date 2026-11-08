@@ -15,4 +15,10 @@ class Film extends Model
     {
         return $this->hasMany(Kritik::class);
     }
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
 }
+

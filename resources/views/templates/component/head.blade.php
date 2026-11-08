@@ -1,3 +1,11 @@
+<style>
+  .w3l-movie-gride-agile img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+  }
+</style>
+
 <head>
   <title>{{ env('APP_NAME'), 'REPAL MOVIE' }}</title>
   <!-- for-mobile-apps -->
