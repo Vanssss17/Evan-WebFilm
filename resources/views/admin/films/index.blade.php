@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="container" style="padding: 2em 0 3em;">
-  <h3>Kelola Film</h3>
+  @include('admin._nav')
 
+  <h3>Kelola Film</h3>
   @if (session('success'))
     <p style="color:green">{{ session('success') }}</p>
   @endif
@@ -18,7 +19,7 @@
           <th>Judul</th>
           <th>Genre</th>
           <th>Tahun</th>
-          <th style="width:150px;">Aksi</th>
+          <th style="width:220px;">Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +30,8 @@
             <td>{{ $film->genre->name ?? '-' }}</td>
             <td>{{ $film->year }}</td>
             <td>
-              <a href="{{ route('admin.films.edit', $film) }}" class="btn btn-primary btn-xs">Edit</a>
+                <a href="{{ route('admin.films.perans.index', $film) }}" class="btn btn-success btn-xs">Peran</a>
+                <a href="{{ route('admin.films.edit', $film) }}" class="btn btn-primary btn-xs">Edit</a>
               <form action="{{ route('admin.films.destroy', $film) }}" method="POST"
                     style="display:inline;"
                     onsubmit="return confirm('Yakin hapus film ini beserta komentarnya?');">
