@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     FilmController,
     AuthController,
+    KritikController,
+    ProfileController,
 };
 
 Route::middleware('guest')->group(function () {
@@ -27,3 +29,12 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+Route::post('/movies/{film}/kritik', [KritikController::class, 'store'])
+    ->middleware('auth')
+    ->name('kritik.store');
+
+    Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});

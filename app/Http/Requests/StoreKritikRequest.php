@@ -11,7 +11,7 @@ class StoreKritikRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check() && auth()->user()->isUser();
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreKritikRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-        ];
+        'comment' => ['required', 'string', 'max:1000'],
+        'rating'  => ['required', 'integer', 'between:1,5'],
+    ];
     }
 }
+

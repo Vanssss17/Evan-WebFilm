@@ -118,20 +118,35 @@
           <div class="all-comments-info">
             <a href="#">Comments</a>
             <div class="agile-info-wthree-box">
-              <form>
-                <input type="text" placeholder="Name" required="">			           					   
-                <input type="text" placeholder="Email" required="">
-                <input type="text" placeholder="Phone" required="">
-                <textarea placeholder="Message" required=""></textarea>
-                <input type="submit" value="SEND">
-                <div class="clearfix"> </div>
-              </form>
+              @auth
+              @if (auth()->user()->isUser())
+                <form action="{{ route('kritik.store', $film) }}" method="POST">
+                  @csrf
+                  <textarea name="comment" placeholder="Tulis komentar/kritik..." required>{{ old('comment') }}</textarea>
+                  <select name="rating" required>
+                    <option value="">Rating</option>
+                    @for ($i = 1; $i <= 5; $i++)
+                      <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                  </select>
+                  <input type="submit" value="SEND">
+                  <div class="clearfix"> </div>
+                </form>
+                @if (session('success')) <p style="color:green">{{ session('success') }}</p> @endif
+                @error('comment') <p style="color:red">{{ $message }}</p> @enderror
+                @error('rating') <p style="color:red">{{ $message }}</p> @enderror
+              @else
+                <p>Admin tidak dapat memberikan komentar.</p>
+              @endif
+            @else
+              <p><a href="{{ route('login') }}">Login</a> untuk memberikan komentar.</p>
+            @endauth
             </div>
           </div>
           <div class="media-grids">
             @foreach ($comments as $comment)
               <div class="media">
-                <h5>{{ $comment->user_id }}</h5>
+                <h5>{{ $comment->user->name }} ({{ $comment->rating }}/5)</h5>
                 <div class="media-left">
                   <a href="#">
                     <img src="{{ asset('storage/images/user.jpg') }}" title="One movies" alt=" " />
