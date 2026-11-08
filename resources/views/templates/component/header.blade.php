@@ -10,10 +10,20 @@
       </form>
     </div>
     <div class="w3l_sign_in_register">
-      <ul>
-        <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-      </ul>
-    </div>
-    <div class="clearfix"> </div>
+  <ul>
+    @auth
+      <li>
+        <span style="color:#212121; font-weight:bold; margin-right:8px;">{{ auth()->user()->name }}</span>
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="post" style="display:none;">
+          @csrf
+        </form>
+      </li>
+    @else
+      <li><a href="{{ route('login') }}">Login</a></li>
+    @endauth
+  </ul>
+</div>
+<div class="clearfix"> </div>
   </div>
 </div>

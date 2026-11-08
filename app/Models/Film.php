@@ -11,5 +11,8 @@ class Film extends Model
     protected $table = 'films';
     protected $fillable = ['title','sinopsis','year','poster','genre_id'];
 
-    
+    public function kritiks()
+    {
+        return $this->hasMany(Kritik::class);
+    }
 }
